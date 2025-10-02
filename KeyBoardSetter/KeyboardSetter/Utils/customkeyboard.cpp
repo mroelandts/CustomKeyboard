@@ -144,7 +144,7 @@ int CustomKeyboard::download(HIDCodeTable *table){
     my_device = hid_open(vid,pid,1,nullptr);
     if(my_device!=NULL){
         //open success,prepare data
-        qDebug() << "device opened" <<endl;
+        qDebug() << "device opened" << Qt::endl;
         uchar frame_set_normal[65]={0x00};
         uchar frame_set_sp[65]={0x00};
         uchar frame_set_macro_status[65]={0x00};

@@ -47,8 +47,9 @@ FORMS += \
     Forms/devicefinder.ui \
     Forms/settingform.ui
 
-LIBS += -L$$_PRO_FILE_PWD_/  libs/libusb-1.0
-LIBS +=  -lsetupapi
+LIBS += -L$$_PRO_FILE_PWD_/
+LIBS += -lusb-1.0
+LIBS += -ludev
 
 
 TRANSLATIONS += lang/trans_zh_CN.ts

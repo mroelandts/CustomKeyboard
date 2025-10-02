@@ -2,7 +2,8 @@
 #include "uipainter.h"
 #include <QLabel>
 #include <QPushButton>
-#include <QRegExpValidator>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QTextBrowser>
 
 UIPainter::UIPainter(QWidget *ui, QObject *parent)
@@ -151,8 +152,8 @@ void UIPainter::drawDelayPart(int x, int y)
     this->et_delay        = new QLineEdit("0.0",this->my_ui);
     //set rule
     //init et_delay
-    QRegExp rx("[12]?\\d\\.[0-9]");
-    QRegExpValidator *pRevalidotor = new QRegExpValidator(rx,this);
+    QRegularExpression rx("[12]?\\d\\.[0-9]");
+    QRegularExpressionValidator *pRevalidotor = new QRegularExpressionValidator(rx,this);
     et_delay->setValidator(pRevalidotor);
     this->btn_delay_plus  = new QPushButton(tr("+"),this->my_ui);
     this->btn_delay_minus = new QPushButton(tr("-"),this->my_ui);

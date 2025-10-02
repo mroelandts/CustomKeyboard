@@ -1,3 +1,5 @@
+# CustomKeyboard
+
 ## File Structure
 
 There are 2 floders and many branches
@@ -14,14 +16,15 @@ There are 2 floders and many branches
 * **FinalVersion 2.1:** most "stable" version. (ゝω・´★)
 
 
+## Windows
 
-## Download
+### Download
 
 Click the given link below will automatically redirect to a URL and download a zip file for you，it's **NECESSARY** to  download this software for keyboard configuration. the downloaded zip file is built from branch FinalVerison2.1
 
  **[Click Here To Download Software](https://github.com/TabbycatPie/CustomKeyboard/releases/tag/stable)**
 
-## After Downloading
+### After Downloading
 
 1. After downloading zipped file (by clicking the link above),unzip it somewhere.
 
@@ -45,7 +48,38 @@ Click the given link below will automatically redirect to a URL and download a z
 
        ![image-20210525175845209](Readme.assets/image-20210525175845209.png)
 
-     
+## Linux
+
+### Build
+```bash
+# install debs
+sudo apt update
+sudo apt-get install libudev-dev libusb-1.0-0-dev build-essential
+# install Qt6
+sudo apt install qt6-base-dev qt6-base-dev-tools
+
+# create the Makefile using Qt
+qmake6
+# build project
+make -j$(nproc)
+```
+
+### Run
+You either mess with your udev rules to allow running it as a normal user.<br>
+Or **quick and dirty** you run it as root.
+```bash
+sudo ./KeyboardSetter
+```
+
+### Extra information
+In order to adapt this project and build&run it on linux I have done the following:
+
+- Swapped the [HidAPI.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.c) with the linux counter part of [HidAPI.h](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.h) from the [official hidapi lib](https://github.com/libusb/hidapi).
+- Made the custom edits that were done to the [HidAPI.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.c) file also to the new linux content.
+- Updated the code so that Qt6 could be used instead of Qt5.
+- Updated the [KeyboardSetter.pro](KeyBoardSetter/KeyboardSetter/KeyboardSetter.pro) so that we're linking against the system libusb-1.0-0-dev lib instead of the local one.
+- Updated the [KeyboardSetter.pro](KeyBoardSetter/KeyboardSetter/KeyboardSetter.pro) so that we're linking again the system libudev lib as this is the backend of the hidapi lib.
+
 
 ## HOW   TO  USE
 
@@ -53,13 +87,17 @@ Click the given link below will automatically redirect to a URL and download a z
 
    ![plugin](Readme.assets/plugin.gif)
 
-2. Double click "KeyboardSetter.exe" 
+2. Execute the executable.
 
-3. According to KeyMapping.png ,find the represented button you want to configure,then click it,it will turn red after clicking, that also means you are now editing this switch. And the soft-keyboard will display. 
+3. Inspect the [KeyMapping picture](Readme.assets/KeyMapper.jpg) so that you know which keyboard you have and which keys you need to configure.
+
+   ![KeyMapping picture](Readme.assets/KeyMapper.jpg)
+
+4. Click the represented button you want to configure, it will turn red after clicking, that also means you are now editing this switch. And the soft-keyboard will display.
 
    ![setkey](Readme.assets/setkey.gif)
 
-4. Press some keys on your soft-keyboard to set the behave  of the switch 
+5. Press some keys on your soft-keyboard to set the behave  of the switch
 
    * For example: The below gif shows how you can set **"Ctrl + C"** (hotkey known as "Copy")  to **"KEY1"**
 
@@ -67,19 +105,19 @@ Click the given link below will automatically redirect to a URL and download a z
 
      After pressing "C" ,the program will auto-complete setting and the action of the switch named "KEY1" will be set to "Ctrl + C"
 
-5. Finally you need to apply settings or configurations to your device ,you need to download them to device by clicking the download button  **with your device plugged in**.
+6. Finally you need to apply settings or configurations to your device ,you need to download them to device by clicking the download button  **with your device plugged in**.
 
    ![download](Readme.assets/download.gif)
 
-6. After download ,the action of the switch will change instantly.
+7. After download ,the action of the switch will change instantly.
 
 ## Advance Feature
 
-Our production also has some advance features such as **Macro** (continuously send key to computer), **Multi-media control** (eg. paly/pause music), **Mouse clicking simulation**... 
+Our production also has some advance features such as **Macro** (continuously send key to computer), **Multi-media control** (eg. paly/pause music), **Mouse clicking simulation**...
 
 ### Macro
 
-A **Macro** is an array of keys sending to computer sequentially. (eg. password,command,hotkeys.) With **Macro**, you can achieve some certain purpose by click one switch on the keyboard. 
+A **Macro** is an array of keys sending to computer sequentially. (eg. password,command,hotkeys.) With **Macro**, you can achieve some certain purpose by click one switch on the keyboard.
 
 * The gif below offers an example of setting up "Open terminal" to a certain switch.
 
@@ -121,7 +159,7 @@ Use tab window to switch pages and setup these keys
 
 ### Non-Windows system usage:
 
-The Keyboard should finish setting on windows pc **first** ,Then plug into other OS. If you are using MacOS, the "Win" key is equal to "command" and "alt" = "option".
+The Keyboard should finish setting on windows pc **first**, Then plug into other OS. If you are using MacOS, the "Win" key is equal to "command" and "alt" = "option".
 
 ### Software related:
 
