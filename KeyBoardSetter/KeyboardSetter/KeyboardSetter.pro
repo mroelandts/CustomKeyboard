@@ -21,7 +21,6 @@ SOURCES += \
     Utils/customkey.cpp \
     Utils/customkeyboard.cpp \
     Forms/devicefinder.cpp \
-    HidAPI/hidapi.c \
     HidAPI/hidcodetable.cpp \
     Utils/keyvalue.cpp \
     main.cpp \
@@ -48,8 +47,14 @@ FORMS += \
     Forms/settingform.ui
 
 LIBS += -L$$_PRO_FILE_PWD_/
-LIBS += -lusb-1.0
-LIBS += -ludev
+win32 {
+    SOURCES += HidAPI/hidapi_windows.c
+    LIBS += libs/libusb-1.0
+} else {
+    # linux and other platforms
+    SOURCES += HidAPI/hidapi_linux.c
+    LIBS += -lusb-1.0 -ludev
+}
 
 
 TRANSLATIONS += lang/trans_zh_CN.ts

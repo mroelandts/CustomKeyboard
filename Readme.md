@@ -74,8 +74,8 @@ sudo ./KeyboardSetter
 ### Extra information
 In order to adapt this project and build&run it on linux I have done the following:
 
-- Swapped the [HidAPI.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.c) with the linux counter part of [HidAPI.h](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.h) from the [official hidapi lib](https://github.com/libusb/hidapi).
-- Made the custom edits that were done to the [HidAPI.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.c) file also to the new linux content.
+- Added the platform specific [hidapi_windows.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi_windows.c) and [hidapi_linux.c](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi_linux.c) of the counter part of [HidAPI.h](KeyBoardSetter/KeyboardSetter/HidAPI/hidapi.h) from the [official hidapi lib](https://github.com/libusb/hidapi) (used the same version `hidapi-0.11.0`).
+- Re-made the custom edits that were done to the HidAPI library. (added wanted interface_number to `hid_open` function)
 - Updated the code so that Qt6 could be used instead of Qt5.
 - Updated the [KeyboardSetter.pro](KeyBoardSetter/KeyboardSetter/KeyboardSetter.pro) so that we're linking against the system libusb-1.0-0-dev lib instead of the local one.
 - Updated the [KeyboardSetter.pro](KeyBoardSetter/KeyboardSetter/KeyboardSetter.pro) so that we're linking again the system libudev lib as this is the backend of the hidapi lib.
